@@ -6,7 +6,4 @@ venv/
 *.csv
 *.gz
 *.geojson
-*.csv
-*.gz
-!Data/chicago_airbnb_geoprocessed_final.csv
-!Data/chicago_airbnb_geoprocessed_final.csv
+!data_processed/chicago_airbnb_geoprocessed_final.csv
