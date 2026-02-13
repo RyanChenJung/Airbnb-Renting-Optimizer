@@ -1,1 +1,12 @@
-
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+xgboost
+shap
+geopandas
+umap-learn
+gensim
+nltk
+optuna
