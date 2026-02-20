@@ -3,7 +3,6 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 venv/
-*.csv
 *.gz
 *.geojson
 !data_processed/chicago_airbnb_geoprocessed_final.csv
