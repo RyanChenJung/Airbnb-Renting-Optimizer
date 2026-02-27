@@ -1,0 +1,2581 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "dbb49517-2bc4-4ce8-b1ab-ab887989c52d",
+   "metadata": {},
+   "source": [
+    "# Shenna (PM & Data) - Week 1 Data Tasks"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5c6ebf70-382a-41f6-b9d3-17ec87a8fc78",
+   "metadata": {},
+   "source": [
+    "## Load calendar.csv Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "4c833161-9e1a-4d05-bedc-0963e5e72b0a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>listing_id</th>\n",
+       "      <th>date</th>\n",
+       "      <th>available</th>\n",
+       "      <th>price</th>\n",
+       "      <th>adjusted_price</th>\n",
+       "      <th>minimum_nights</th>\n",
+       "      <th>maximum_nights</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>2025-09-22</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>3</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>2025-09-23</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>3</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>2025-09-24</td>\n",
+       "      <td>t</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>3</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>2025-09-25</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>3</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>2025-09-26</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>3</td>\n",
+       "      <td>90</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   listing_id        date available  price  adjusted_price  minimum_nights  \\\n",
+       "0        2384  2025-09-22         f    NaN             NaN               3   \n",
+       "1        2384  2025-09-23         f    NaN             NaN               3   \n",
+       "2        2384  2025-09-24         t    NaN             NaN               3   \n",
+       "3        2384  2025-09-25         f    NaN             NaN               3   \n",
+       "4        2384  2025-09-26         f    NaN             NaN               3   \n",
+       "\n",
+       "   maximum_nights  \n",
+       "0              90  \n",
+       "1              90  \n",
+       "2              90  \n",
+       "3              90  \n",
+       "4              90  "
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "calendar = pd.read_csv(\n",
+    "    \"/Users/shennalu/Downloads/calendar.csv.gz\",\n",
+    "    compression=\"gzip\"\n",
+    ")\n",
+    "\n",
+    "calendar.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "9b3264a2-8357-49f6-ba71-ae43a882b9e2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>listing_id</th>\n",
+       "      <th>date</th>\n",
+       "      <th>available</th>\n",
+       "      <th>price</th>\n",
+       "      <th>adjusted_price</th>\n",
+       "      <th>minimum_nights</th>\n",
+       "      <th>maximum_nights</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>3161990</th>\n",
+       "      <td>30843280</td>\n",
+       "      <td>2026-09-19</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20</td>\n",
+       "      <td>365</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3161991</th>\n",
+       "      <td>30843280</td>\n",
+       "      <td>2026-09-20</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20</td>\n",
+       "      <td>365</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3161992</th>\n",
+       "      <td>30843280</td>\n",
+       "      <td>2026-09-21</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20</td>\n",
+       "      <td>365</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3161993</th>\n",
+       "      <td>30843280</td>\n",
+       "      <td>2026-09-22</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20</td>\n",
+       "      <td>365</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3161994</th>\n",
+       "      <td>30843280</td>\n",
+       "      <td>2026-09-23</td>\n",
+       "      <td>f</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>20</td>\n",
+       "      <td>365</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "         listing_id        date available  price  adjusted_price  \\\n",
+       "3161990    30843280  2026-09-19         f    NaN             NaN   \n",
+       "3161991    30843280  2026-09-20         f    NaN             NaN   \n",
+       "3161992    30843280  2026-09-21         f    NaN             NaN   \n",
+       "3161993    30843280  2026-09-22         f    NaN             NaN   \n",
+       "3161994    30843280  2026-09-23         f    NaN             NaN   \n",
+       "\n",
+       "         minimum_nights  maximum_nights  \n",
+       "3161990              20             365  \n",
+       "3161991              20             365  \n",
+       "3161992              20             365  \n",
+       "3161993              20             365  \n",
+       "3161994              20             365  "
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "calendar.tail()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "9e8a2a6d-9a22-4645-8526-db25ad272532",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(1.0)"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "calendar['price'].isna().mean()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "452df11b-0eb6-49d1-99b9-d3b056348b98",
+   "metadata": {},
+   "source": [
+    "### 1) Clean date + create “booked” indicator"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "d4019641-acd5-49ca-a614-1875946e73dd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "calendar[\"date\"] = pd.to_datetime(calendar[\"date\"])\n",
+    "calendar[\"is_booked\"] = (calendar[\"available\"] == \"f\")  # True if booked/blocked, False if available"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a1fdf857-63c4-4c2e-be07-3fa7bf88231b",
+   "metadata": {},
+   "source": [
+    "### 2) Basic booking rate per listing"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "5017d44c-fece-4b9b-9fa9-ec9f682352aa",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "booking_rate = (\n",
+    "    calendar.groupby(\"listing_id\")[\"is_booked\"]\n",
+    "    .mean()\n",
+    "    .reset_index()\n",
+    "    .rename(columns={\"is_booked\": \"booking_rate\"})\n",
+    ")\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9aaadd03-8893-47b3-a172-4273665c3788",
+   "metadata": {},
+   "source": [
+    "### 3) Weekend booking rate"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "5b6225e6-6b01-4ffb-bbeb-c58df249a809",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "calendar[\"is_weekend\"] = calendar[\"date\"].dt.weekday >= 5\n",
+    "\n",
+    "weekend_booking_rate = (\n",
+    "    calendar[calendar[\"is_weekend\"]]\n",
+    "    .groupby(\"listing_id\")[\"is_booked\"]\n",
+    "    .mean()\n",
+    "    .reset_index()\n",
+    "    .rename(columns={\"is_booked\": \"weekend_booking_rate\"})\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a3bed0f9-8751-4d52-abd0-94f2dd724325",
+   "metadata": {},
+   "source": [
+    "### 4) Summer vs Winter booking rate"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "3d3f0a58-550c-4b41-bc05-3107068897a4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "calendar[\"month\"] = calendar[\"date\"].dt.month\n",
+    "\n",
+    "summer_booking_rate = (\n",
+    "    calendar[calendar[\"month\"].isin([6, 7, 8])]\n",
+    "    .groupby(\"listing_id\")[\"is_booked\"]\n",
+    "    .mean()\n",
+    "    .reset_index()\n",
+    "    .rename(columns={\"is_booked\": \"summer_booking_rate\"})\n",
+    ")\n",
+    "\n",
+    "winter_booking_rate = (\n",
+    "    calendar[calendar[\"month\"].isin([12, 1, 2])]\n",
+    "    .groupby(\"listing_id\")[\"is_booked\"]\n",
+    "    .mean()\n",
+    "    .reset_index()\n",
+    "    .rename(columns={\"is_booked\": \"winter_booking_rate\"})\n",
+    ")\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a3e5311a-8cf8-40f1-afa0-2051c4562ea7",
+   "metadata": {},
+   "source": [
+    "### Merge the calendar aggregates into one table"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "048033ea-d234-4b72-9727-cd6c4b1a0327",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>listing_id</th>\n",
+       "      <th>booking_rate</th>\n",
+       "      <th>weekend_booking_rate</th>\n",
+       "      <th>summer_booking_rate</th>\n",
+       "      <th>winter_booking_rate</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>0.046575</td>\n",
+       "      <td>0.048077</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>7126</td>\n",
+       "      <td>0.172603</td>\n",
+       "      <td>0.182692</td>\n",
+       "      <td>0.086957</td>\n",
+       "      <td>0.077778</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>10945</td>\n",
+       "      <td>0.109589</td>\n",
+       "      <td>0.115385</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>12140</td>\n",
+       "      <td>0.572603</td>\n",
+       "      <td>0.605769</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28749</td>\n",
+       "      <td>0.797260</td>\n",
+       "      <td>0.807692</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>0.766667</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   listing_id  booking_rate  weekend_booking_rate  summer_booking_rate  \\\n",
+       "0        2384      0.046575              0.048077             0.000000   \n",
+       "1        7126      0.172603              0.182692             0.086957   \n",
+       "2       10945      0.109589              0.115385             0.000000   \n",
+       "3       12140      0.572603              0.605769             1.000000   \n",
+       "4       28749      0.797260              0.807692             1.000000   \n",
+       "\n",
+       "   winter_booking_rate  \n",
+       "0             0.000000  \n",
+       "1             0.077778  \n",
+       "2             0.000000  \n",
+       "3             0.000000  \n",
+       "4             0.766667  "
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "calendar_agg = booking_rate.merge(weekend_booking_rate, on=\"listing_id\", how=\"left\")\n",
+    "calendar_agg = calendar_agg.merge(summer_booking_rate, on=\"listing_id\", how=\"left\")\n",
+    "calendar_agg = calendar_agg.merge(winter_booking_rate, on=\"listing_id\", how=\"left\")\n",
+    "\n",
+    "# If a listing has no weekend/summer/winter rows (rare), fill with overall booking_rate\n",
+    "calendar_agg[\"weekend_booking_rate\"] = calendar_agg[\"weekend_booking_rate\"].fillna(calendar_agg[\"booking_rate\"])\n",
+    "calendar_agg[\"summer_booking_rate\"]  = calendar_agg[\"summer_booking_rate\"].fillna(calendar_agg[\"booking_rate\"])\n",
+    "calendar_agg[\"winter_booking_rate\"]  = calendar_agg[\"winter_booking_rate\"].fillna(calendar_agg[\"booking_rate\"])\n",
+    "\n",
+    "calendar_agg.head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "aa6a6dcf-ac20-4b52-b04d-40e1aeef2676",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Rows: 8663\n",
+      "Duplicate listing_id: 0\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>booking_rate</th>\n",
+       "      <th>weekend_booking_rate</th>\n",
+       "      <th>summer_booking_rate</th>\n",
+       "      <th>winter_booking_rate</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>8663.000000</td>\n",
+       "      <td>8663.000000</td>\n",
+       "      <td>8663.000000</td>\n",
+       "      <td>8663.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>0.369990</td>\n",
+       "      <td>0.378117</td>\n",
+       "      <td>0.443991</td>\n",
+       "      <td>0.257037</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>0.321072</td>\n",
+       "      <td>0.321402</td>\n",
+       "      <td>0.463097</td>\n",
+       "      <td>0.374855</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>0.073973</td>\n",
+       "      <td>0.076923</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>0.287671</td>\n",
+       "      <td>0.307692</td>\n",
+       "      <td>0.097826</td>\n",
+       "      <td>0.011111</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>0.613699</td>\n",
+       "      <td>0.625000</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>0.488889</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>1.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       booking_rate  weekend_booking_rate  summer_booking_rate  \\\n",
+       "count   8663.000000           8663.000000          8663.000000   \n",
+       "mean       0.369990              0.378117             0.443991   \n",
+       "std        0.321072              0.321402             0.463097   \n",
+       "min        0.000000              0.000000             0.000000   \n",
+       "25%        0.073973              0.076923             0.000000   \n",
+       "50%        0.287671              0.307692             0.097826   \n",
+       "75%        0.613699              0.625000             1.000000   \n",
+       "max        1.000000              1.000000             1.000000   \n",
+       "\n",
+       "       winter_booking_rate  \n",
+       "count          8663.000000  \n",
+       "mean              0.257037  \n",
+       "std               0.374855  \n",
+       "min               0.000000  \n",
+       "25%               0.000000  \n",
+       "50%               0.011111  \n",
+       "75%               0.488889  \n",
+       "max               1.000000  "
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "print(\"Rows:\", calendar_agg.shape[0])\n",
+    "print(\"Duplicate listing_id:\", calendar_agg[\"listing_id\"].duplicated().sum())\n",
+    "\n",
+    "calendar_agg[[\"booking_rate\",\"weekend_booking_rate\",\"summer_booking_rate\",\"winter_booking_rate\"]].describe()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5fcaf1b2-7c7a-4c82-ac4e-330db3782ed0",
+   "metadata": {},
+   "source": [
+    "## Load listings.csv Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "f1ff1ecb-dd6c-4ec7-8977-a25048e1dd6f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>listing_url</th>\n",
+       "      <th>scrape_id</th>\n",
+       "      <th>last_scraped</th>\n",
+       "      <th>source</th>\n",
+       "      <th>name</th>\n",
+       "      <th>description</th>\n",
+       "      <th>neighborhood_overview</th>\n",
+       "      <th>picture_url</th>\n",
+       "      <th>host_id</th>\n",
+       "      <th>...</th>\n",
+       "      <th>review_scores_communication</th>\n",
+       "      <th>review_scores_location</th>\n",
+       "      <th>review_scores_value</th>\n",
+       "      <th>license</th>\n",
+       "      <th>instant_bookable</th>\n",
+       "      <th>calculated_host_listings_count</th>\n",
+       "      <th>calculated_host_listings_count_entire_homes</th>\n",
+       "      <th>calculated_host_listings_count_private_rooms</th>\n",
+       "      <th>calculated_host_listings_count_shared_rooms</th>\n",
+       "      <th>reviews_per_month</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>https://www.airbnb.com/rooms/2384</td>\n",
+       "      <td>20250922033851</td>\n",
+       "      <td>2025-09-22</td>\n",
+       "      <td>city scrape</td>\n",
+       "      <td>Hyde Park - Walk to University of Chicago</td>\n",
+       "      <td>Solo Hyde Park visitors are invited to enjoy t...</td>\n",
+       "      <td>The apartment is less than one block from beau...</td>\n",
+       "      <td>https://a0.muscache.com/pictures/hosting/Hosti...</td>\n",
+       "      <td>2613</td>\n",
+       "      <td>...</td>\n",
+       "      <td>4.98</td>\n",
+       "      <td>4.95</td>\n",
+       "      <td>4.93</td>\n",
+       "      <td>R17000015609</td>\n",
+       "      <td>f</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1.97</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>7126</td>\n",
+       "      <td>https://www.airbnb.com/rooms/7126</td>\n",
+       "      <td>20250922033851</td>\n",
+       "      <td>2025-09-22</td>\n",
+       "      <td>city scrape</td>\n",
+       "      <td>Tiny Studio Apartment 94 Walk Score</td>\n",
+       "      <td>A very small studio in a wonderful neighborhood.</td>\n",
+       "      <td>Ukrainian Village was just named \"Hottest Neig...</td>\n",
+       "      <td>https://a0.muscache.com/pictures/51073/16c81c7...</td>\n",
+       "      <td>17928</td>\n",
+       "      <td>...</td>\n",
+       "      <td>4.88</td>\n",
+       "      <td>4.90</td>\n",
+       "      <td>4.77</td>\n",
+       "      <td>R24000114046</td>\n",
+       "      <td>f</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>3.01</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>10945</td>\n",
+       "      <td>https://www.airbnb.com/rooms/10945</td>\n",
+       "      <td>20250922033851</td>\n",
+       "      <td>2025-09-24</td>\n",
+       "      <td>city scrape</td>\n",
+       "      <td>The Biddle House (#1)</td>\n",
+       "      <td>Beautiful first floor apartment in Historic Ol...</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>https://a0.muscache.com/pictures/58d1a420-a24b...</td>\n",
+       "      <td>33004</td>\n",
+       "      <td>...</td>\n",
+       "      <td>4.88</td>\n",
+       "      <td>4.98</td>\n",
+       "      <td>4.73</td>\n",
+       "      <td>2209984</td>\n",
+       "      <td>t</td>\n",
+       "      <td>6</td>\n",
+       "      <td>6</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.93</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>12140</td>\n",
+       "      <td>https://www.airbnb.com/rooms/12140</td>\n",
+       "      <td>20250922033851</td>\n",
+       "      <td>2025-09-24</td>\n",
+       "      <td>city scrape</td>\n",
+       "      <td>Lincoln Park Guest House</td>\n",
+       "      <td>Bed and Breakfast license issued by the City o...</td>\n",
+       "      <td>The Guest House is in the heart of Chicago's m...</td>\n",
+       "      <td>https://a0.muscache.com/pictures/miso/Hosting-...</td>\n",
+       "      <td>46734</td>\n",
+       "      <td>...</td>\n",
+       "      <td>5.00</td>\n",
+       "      <td>5.00</td>\n",
+       "      <td>4.68</td>\n",
+       "      <td>2398451</td>\n",
+       "      <td>f</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.15</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28749</td>\n",
+       "      <td>https://www.airbnb.com/rooms/28749</td>\n",
+       "      <td>20250922033851</td>\n",
+       "      <td>2025-09-23</td>\n",
+       "      <td>city scrape</td>\n",
+       "      <td>Quirky Bucktown Loft w/ Parking No Parties</td>\n",
+       "      <td>Located on a peaceful treelined street in ener...</td>\n",
+       "      <td>Bucktown is a thriving community on the Northw...</td>\n",
+       "      <td>https://a0.muscache.com/pictures/95884ff6-a672...</td>\n",
+       "      <td>27506</td>\n",
+       "      <td>...</td>\n",
+       "      <td>4.88</td>\n",
+       "      <td>4.93</td>\n",
+       "      <td>4.73</td>\n",
+       "      <td>R24000113825</td>\n",
+       "      <td>f</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>1.47</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>5 rows × 79 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      id                         listing_url       scrape_id last_scraped  \\\n",
+       "0   2384   https://www.airbnb.com/rooms/2384  20250922033851   2025-09-22   \n",
+       "1   7126   https://www.airbnb.com/rooms/7126  20250922033851   2025-09-22   \n",
+       "2  10945  https://www.airbnb.com/rooms/10945  20250922033851   2025-09-24   \n",
+       "3  12140  https://www.airbnb.com/rooms/12140  20250922033851   2025-09-24   \n",
+       "4  28749  https://www.airbnb.com/rooms/28749  20250922033851   2025-09-23   \n",
+       "\n",
+       "        source                                        name  \\\n",
+       "0  city scrape   Hyde Park - Walk to University of Chicago   \n",
+       "1  city scrape         Tiny Studio Apartment 94 Walk Score   \n",
+       "2  city scrape                       The Biddle House (#1)   \n",
+       "3  city scrape                    Lincoln Park Guest House   \n",
+       "4  city scrape  Quirky Bucktown Loft w/ Parking No Parties   \n",
+       "\n",
+       "                                         description  \\\n",
+       "0  Solo Hyde Park visitors are invited to enjoy t...   \n",
+       "1   A very small studio in a wonderful neighborhood.   \n",
+       "2  Beautiful first floor apartment in Historic Ol...   \n",
+       "3  Bed and Breakfast license issued by the City o...   \n",
+       "4  Located on a peaceful treelined street in ener...   \n",
+       "\n",
+       "                               neighborhood_overview  \\\n",
+       "0  The apartment is less than one block from beau...   \n",
+       "1  Ukrainian Village was just named \"Hottest Neig...   \n",
+       "2                                                NaN   \n",
+       "3  The Guest House is in the heart of Chicago's m...   \n",
+       "4  Bucktown is a thriving community on the Northw...   \n",
+       "\n",
+       "                                         picture_url  host_id  ...  \\\n",
+       "0  https://a0.muscache.com/pictures/hosting/Hosti...     2613  ...   \n",
+       "1  https://a0.muscache.com/pictures/51073/16c81c7...    17928  ...   \n",
+       "2  https://a0.muscache.com/pictures/58d1a420-a24b...    33004  ...   \n",
+       "3  https://a0.muscache.com/pictures/miso/Hosting-...    46734  ...   \n",
+       "4  https://a0.muscache.com/pictures/95884ff6-a672...    27506  ...   \n",
+       "\n",
+       "  review_scores_communication review_scores_location review_scores_value  \\\n",
+       "0                        4.98                   4.95                4.93   \n",
+       "1                        4.88                   4.90                4.77   \n",
+       "2                        4.88                   4.98                4.73   \n",
+       "3                        5.00                   5.00                4.68   \n",
+       "4                        4.88                   4.93                4.73   \n",
+       "\n",
+       "        license instant_bookable calculated_host_listings_count  \\\n",
+       "0  R17000015609                f                              1   \n",
+       "1  R24000114046                f                              1   \n",
+       "2       2209984                t                              6   \n",
+       "3       2398451                f                              1   \n",
+       "4  R24000113825                f                              1   \n",
+       "\n",
+       "  calculated_host_listings_count_entire_homes  \\\n",
+       "0                                           0   \n",
+       "1                                           1   \n",
+       "2                                           6   \n",
+       "3                                           0   \n",
+       "4                                           1   \n",
+       "\n",
+       "  calculated_host_listings_count_private_rooms  \\\n",
+       "0                                            1   \n",
+       "1                                            0   \n",
+       "2                                            0   \n",
+       "3                                            1   \n",
+       "4                                            0   \n",
+       "\n",
+       "  calculated_host_listings_count_shared_rooms reviews_per_month  \n",
+       "0                                           0              1.97  \n",
+       "1                                           0              3.01  \n",
+       "2                                           0              0.93  \n",
+       "3                                           0              0.15  \n",
+       "4                                           0              1.47  \n",
+       "\n",
+       "[5 rows x 79 columns]"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings = pd.read_csv(\n",
+    "    \"/Users/shennalu/Downloads/listings.csv.gz\",\n",
+    "    compression=\"gzip\",\n",
+    "    low_memory=False\n",
+    ")\n",
+    "\n",
+    "listings.head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "614da330-bbe7-4ea9-84a7-e390b526b21c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['id', 'listing_url', 'scrape_id', 'last_scraped', 'source', 'name',\n",
+       "       'description', 'neighborhood_overview', 'picture_url', 'host_id',\n",
+       "       'host_url', 'host_name', 'host_since', 'host_location', 'host_about',\n",
+       "       'host_response_time', 'host_response_rate', 'host_acceptance_rate',\n",
+       "       'host_is_superhost', 'host_thumbnail_url', 'host_picture_url',\n",
+       "       'host_neighbourhood', 'host_listings_count',\n",
+       "       'host_total_listings_count', 'host_verifications',\n",
+       "       'host_has_profile_pic', 'host_identity_verified', 'neighbourhood',\n",
+       "       'neighbourhood_cleansed', 'neighbourhood_group_cleansed', 'latitude',\n",
+       "       'longitude', 'property_type', 'room_type', 'accommodates', 'bathrooms',\n",
+       "       'bathrooms_text', 'bedrooms', 'beds', 'amenities', 'price',\n",
+       "       'minimum_nights', 'maximum_nights', 'minimum_minimum_nights',\n",
+       "       'maximum_minimum_nights', 'minimum_maximum_nights',\n",
+       "       'maximum_maximum_nights', 'minimum_nights_avg_ntm',\n",
+       "       'maximum_nights_avg_ntm', 'calendar_updated', 'has_availability',\n",
+       "       'availability_30', 'availability_60', 'availability_90',\n",
+       "       'availability_365', 'calendar_last_scraped', 'number_of_reviews',\n",
+       "       'number_of_reviews_ltm', 'number_of_reviews_l30d', 'availability_eoy',\n",
+       "       'number_of_reviews_ly', 'estimated_occupancy_l365d',\n",
+       "       'estimated_revenue_l365d', 'first_review', 'last_review',\n",
+       "       'review_scores_rating', 'review_scores_accuracy',\n",
+       "       'review_scores_cleanliness', 'review_scores_checkin',\n",
+       "       'review_scores_communication', 'review_scores_location',\n",
+       "       'review_scores_value', 'license', 'instant_bookable',\n",
+       "       'calculated_host_listings_count',\n",
+       "       'calculated_host_listings_count_entire_homes',\n",
+       "       'calculated_host_listings_count_private_rooms',\n",
+       "       'calculated_host_listings_count_shared_rooms', 'reviews_per_month'],\n",
+       "      dtype='object')"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "d3483aca-46f8-4898-9ff4-c2a390628934",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(0.0964203233256351)"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings['price'].isna().mean()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0bb230fd-567c-47c3-a6a9-2c676b0df52a",
+   "metadata": {},
+   "source": [
+    "### Clean Price Column"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "1f90b260-96de-4a55-bdb6-2a41f3c44fd0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "listings['price'] = (\n",
+    "    listings['price']\n",
+    "    .str.replace('$', '', regex=False)\n",
+    "    .str.replace(',', '', regex=False)\n",
+    "    .astype(float)\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "88c0a06f-0379-475f-b92d-a336c9d274a0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count     7825.000000\n",
+       "mean       601.304792\n",
+       "std       4200.617938\n",
+       "min         13.000000\n",
+       "25%         97.000000\n",
+       "50%        153.000000\n",
+       "75%        240.000000\n",
+       "max      50032.000000\n",
+       "Name: price, dtype: float64"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings['price'].describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9afa3b6b-7bb9-498b-b6d5-e1ef56e2d57d",
+   "metadata": {},
+   "source": [
+    "### Calculate Occupancy Rate"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "83f8fbe2-6304-40c2-9127-aec9133c4e12",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "listings['occupancy_rate'] = 1 - (listings['availability_365'] / 365)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "71631ef4-25a9-4925-8c21-5d7a157d8e0f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count    8660.000000\n",
+       "mean        0.370355\n",
+       "std         0.321378\n",
+       "min         0.000000\n",
+       "25%         0.073973\n",
+       "50%         0.287671\n",
+       "75%         0.613699\n",
+       "max         1.000000\n",
+       "Name: occupancy_rate, dtype: float64"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings['occupancy_rate'].describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1ba46567-0ac0-41b6-9f2a-56d66e2efdf2",
+   "metadata": {},
+   "source": [
+    "### Estimate Annual Revenue"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a1918713-95d2-474a-90f8-ef92ccd01d3d",
+   "metadata": {},
+   "source": [
+    "Since Inside Airbnb does not provide realized transaction revenue, we constructed an annual revenue proxy by combining listing price with observed occupancy derived from availability_365."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "4480cac3-17b7-4128-b324-ff5ceb31323b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "listings['estimated_annual_revenue'] = (\n",
+    "    listings['price'] *\n",
+    "    listings['occupancy_rate'] *\n",
+    "    365\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "a60cd807-701b-4f07-917c-27bc1f9c4279",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>price</th>\n",
+       "      <th>occupancy_rate</th>\n",
+       "      <th>estimated_annual_revenue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>119.0</td>\n",
+       "      <td>0.046575</td>\n",
+       "      <td>2023.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>89.0</td>\n",
+       "      <td>0.172603</td>\n",
+       "      <td>5607.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>203.0</td>\n",
+       "      <td>0.109589</td>\n",
+       "      <td>8120.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>339.0</td>\n",
+       "      <td>0.572603</td>\n",
+       "      <td>70851.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>258.0</td>\n",
+       "      <td>0.797260</td>\n",
+       "      <td>75078.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   price  occupancy_rate  estimated_annual_revenue\n",
+       "0  119.0        0.046575                    2023.0\n",
+       "1   89.0        0.172603                    5607.0\n",
+       "2  203.0        0.109589                    8120.0\n",
+       "3  339.0        0.572603                   70851.0\n",
+       "4  258.0        0.797260                   75078.0"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings[['price','occupancy_rate','estimated_annual_revenue']].head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "565a3485-ea04-4867-bd31-e46d3353da8e",
+   "metadata": {},
+   "source": [
+    "### Check Distribution"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "df72ba42-4d6a-47ce-b1a0-a24043d74553",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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8cYbrfW125s5c6ZGjhxZ7/a6dOni9zhCQkLk9XrrtH/33Xc+j9u0aaOePXvq7rvvrnc7brfb730DRyLEAH4KCQlRcnKyzj33XL355pvasmWLEhMTT+h/rf5yOBwyxvh8IEvSk08+6XNCcm1/6+vX5ZdfrnPPPVfbt28/5o3ngoOD1adPH7300ku69957rUBQUVGhf/zjH8ft644dO7R27Vr99re/rXc/d911l1555RV999139c6qNIXa++P861//sr4alFSn/7VXMB35ui5YsKBJ++NwOPTII4+oW7duuv322/Xmm282+P2ode211+rWW29VXl6evvjiC7Vv316DBg2y1nfp0kVxcXH66KOPrJO7m0KnTp18rn6Sfgp/lZWVPm0pKSlasWKFLrjgArVu3brJ9g/8HCEGkLR169Z6L/u84IIL1LZtW91xxx3avXu3+vfvrw4dOqisrEx//etffc6XuOCCCxQaGqr8/Hx17dpV55xzjtxu90n5H2d4eLh+9atf6d5771WbNm3UqVMnFRYWatGiRTr33HN9art37y5JWrhwoVq1aqUWLVooNjZWkZGRevjhhzV69Gh9//33+t3vfqeoqCjt379fH330kfbv36/HHntMkvR///d/GjJkiAYOHKipU6eqpqZGc+fOVVhY2HFnfmpnYaZNm6Y+ffrUWV9RUaG3335bzz77rP74xz82watT17BhwxQREaGxY8fqzjvvVGBgoPLy8rRr1y6fuqSkJLVu3Vo33XSTZs2apaCgIOXn5+ujjz5q8j7FxcVpwoQJevTRR7V69WpdccUVDX4/JOncc8/V//zP/ygvL09lZWXKysrSL37he5rjggULNHToUA0ePFg33HCD2rdvr++//147duzQhx9+qBdffNHvfmdkZOgvf/mL7rjjDiUnJ2v79u3Kzc2V0+n0qbvzzju1atUqJSUlacqUKerSpYt+/PFHffnll1qxYoUef/xx7p2EE3e6zywGTqdjXZ0kyTzxxBPGGGNee+01M3ToUNO+fXsTHBxsoqKizLBhw8wHH3zgs73nn3/eXHjhhSYoKMjnKo6jXZ00fPjwOn2SZG6++Waftp07dxpJ5t5777Xadu/ebX7729+a1q1bm1atWpkhQ4aYrVu31rlKxBhjHnzwQRMbG2sCAgLqXEFVWFhohg8fbiIiIkxQUJBp3769GT58uHnxxRd9tvHqq6+anj17muDgYHPeeeeZe+6557hX6FRXV5uoqChzySWXHLXm0KFDpkOHDqZHjx7GmP++Jxs3bvSpq72a6edXWR3tNUxOTjbJyck+bRs2bDBJSUkmLCzMtG/f3syaNcs8+eSTda5OWrNmjUlMTDQtW7Y0bdu2NePGjTMffvhhndfN36uT9u/fX2fd3r17zTnnnGOuuuoqq62h74cxxqxcudL6u/rZZ5/Vu/+PPvrIpKWlmaioKBMUFGRcLpf59a9/bR5//HGrxp/X3Ov1mmnTppmYmBgTGhpqkpOTTVFRUb1/7/bv32+mTJliYmNjTVBQkImIiDDx8fHmtttuM5WVlcd97YDjcRhjzCnMTAAAAE2CS6wBAIAtEWIAAIAtEWIAAIAtEWIAAIAtEWIAAIAtEWIAAIAtNdub3R0+fFh79uxRq1atrLtwAgCAM5sxRhUVFXK73XVu4HikZhti9uzZo5iYmNPdDQAA0Ai7du067l2d/Qoxhw4d0uzZs5Wfn6+SkhK1a9dON9xwg26//XYrLRljNGfOHC1cuFClpaVKSEjQI488oosuusjajtfrVVZWlp5//nlVVVWpf//+evTRR306W1paqilTpujVV1+V9NNPxD/88MN1bql+NK1atbJehPDwcH+GCQAATpPy8nLFxMRYn+PH4leImTt3rh5//HEtWbJEF110kTZt2qQbb7xRTqfT+s2TefPmaf78+crLy1Pnzp111113aeDAgfr000+tDmVmZuof//iHli5dqsjISE2dOlUpKSnavHmzAgICJEnp6enavXu3CgoKJEkTJkxQRkZGg35wTvrvD7mFh4cTYgAAsJkGnQriz28UDB8+3IwZM8anbeTIkeYPf/iDMcaYw4cPG5fLZe655x5r/Y8//micTqf1Ox1lZWUmKCjILF261Kr55ptvzC9+8QtTUFBgjDFm+/btRpJZt26dVbN27VojyXzyyScN6qvH4zGSjMfj8WeIAADgNPLn89uvq5OuuOIKvf322/rss88kSR999JFWr16tYcOGSZJ27typkpISn5+DDwkJUXJystasWSNJ2rx5sw4ePOhT43a71b17d6tm7dq1cjqdSkhIsGr69u0rp9Np1RzJ6/WqvLzcZwEAAM2XX18nTZ8+XR6PRxdeeKECAgJUU1Oju+++W9dee60kqaSkRJIUHR3t87zo6Gh99dVXVk1wcLBat25dp6b2+SUlJYqKiqqz/6ioKKvmSDk5OZozZ44/wwEAADbm10zMsmXL9Oyzz+q5557Thx9+qCVLlui+++7TkiVLfOqO/B7LGHPc77aOrKmv/ljbmTlzpjwej7Xs2rWrocMCAAA25NdMzJ///GfNmDFDv//97yVJPXr00FdffaWcnByNHj1aLpdLkqwrl2rt27fPmp1xuVyqrq5WaWmpz2zMvn37lJSUZNXs3bu3zv73799fZ5anVkhIiEJCQvwZDgAAsDG/ZmJ++OGHOjeeCQgI0OHDhyVJsbGxcrlcWrVqlbW+urpahYWFVkCJj49XUFCQT01xcbG2bt1q1SQmJsrj8WjDhg1Wzfr16+XxeKwaAABwdvNrJmbEiBG6++67dd555+miiy7Sli1bNH/+fI0ZM0bST18BZWZmKjs7W3FxcYqLi1N2drZatmyp9PR0SZLT6dTYsWM1depURUZGKiIiQllZWerRo4cGDBggSeratauGDBmi8ePHa8GCBZJ+usQ6JSVFXbp0acrxAwAAm/IrxDz88MP6y1/+okmTJmnfvn1yu92aOHGi7rjjDqtm2rRpqqqq0qRJk6yb3a1cudLnpjUPPPCAAgMDlZaWZt3sLi8vz7pHjCTl5+drypQp1lVMqampys3NPdHxAgCAZsJhjDGnuxMnQ3l5uZxOpzweDze7AwDAJvz5/OZXrAEAgC0RYgAAgC0RYgAAgC0RYgAAgC0RYgAAgC35dYk1/qvTjNePW/PlPcNPQU8AADg7MRMDAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsya8Q06lTJzkcjjrLzTffLEkyxmj27Nlyu90KDQ1Vv379tG3bNp9teL1eTZ48WW3atFFYWJhSU1O1e/dun5rS0lJlZGTI6XTK6XQqIyNDZWVlJzZSAADQrPgVYjZu3Kji4mJrWbVqlSTpmmuukSTNmzdP8+fPV25urjZu3CiXy6WBAweqoqLC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lJmZqezsbMXFxSkuLk7Z2dlq2bKl0tPTJUlOp1Njx47V1KlTFRkZqYiICGVlZalHjx4aMGCApJ9md4YMGaLx48drwYIFkqQJEyYoJSWlQVcmAQCA5s+vEHPZZZdp+fLlmjlzpu68807FxsbqwQcf1HXXXWfVTJs2TVVVVZo0aZJKS0uVkJCglStXqlWrVlbNAw88oMDAQKWlpamqqkr9+/dXXl6eAgICrJr8/HxNmTLFuoopNTVVubm5JzpeAADQTPh1nxg74T4xAADYz0m7TwwAAMCZghADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsiRADAABsya8QM3v2bDkcDp/F5XJZ640xmj17ttxut0JDQ9WvXz9t27bNZxter1eTJ09WmzZtFBYWptTUVO3evdunprS0VBkZGXI6nXI6ncrIyFBZWVnjRwkAAJodv2diLrroIhUXF1vLxx9/bK2bN2+e5s+fr9zcXG3cuFEul0sDBw5URUWFVZOZmanly5dr6dKlWr16tSorK5WSkqKamhqrJj09XUVFRSooKFBBQYGKioqUkZFxgkMFAADNSaDfTwgM9Jl9qWWM0YMPPqjbbrtNI0eOlCQtWbJE0dHReu655zRx4kR5PB4tWrRIzzzzjAYMGCBJevbZZxUTE6O33npLgwcP1o4dO1RQUKB169YpISFBkvTEE08oMTFRn376qbp06VJvv7xer7xer/W4vLzc36EBAAAb8Xsm5vPPP5fb7VZsbKx+//vf64svvpAk7dy5UyUlJRo0aJBVGxISouTkZK1Zs0aStHnzZh08eNCnxu12q3v37lbN2rVr5XQ6rQAjSX379pXT6bRq6pOTk2N9/eR0OhUTE+Pv0AAAgI34FWISEhL09NNP680339QTTzyhkpISJSUl6bvvvlNJSYkkKTo62uc50dHR1rqSkhIFBwerdevWx6yJioqqs++oqCirpj4zZ86Ux+Oxll27dvkzNAAAYDN+fZ00dOhQ6889evRQYmKiLrjgAi1ZskR9+/aVJDkcDp/nGGPqtB3pyJr66o+3nZCQEIWEhDRoHAAAwP5O6BLrsLAw9ejRQ59//rl1nsyRsyX79u2zZmdcLpeqq6tVWlp6zJq9e/fW2df+/fvrzPIAAICz1wmFGK/Xqx07dqhdu3aKjY2Vy+XSqlWrrPXV1dUqLCxUUlKSJCk+Pl5BQUE+NcXFxdq6datVk5iYKI/How0bNlg169evl8fjsWoAAAD8+jopKytLI0aM0Hnnnad9+/bprrvuUnl5uUaPHi2Hw6HMzExlZ2crLi5OcXFxys7OVsuWLZWeni5JcjqdGjt2rKZOnarIyEhFREQoKytLPXr0sK5W6tq1q4YMGaLx48drwYIFkqQJEyYoJSXlqFcmAQCAs49fIWb37t269tpr9e2336pt27bq27ev1q1bp44dO0qSpk2bpqqqKk2aNEmlpaVKSEjQypUr1apVK2sbDzzwgAIDA5WWlqaqqir1799feXl5CggIsGry8/M1ZcoU6yqm1NRU5ebmNsV4AQBAM+EwxpjT3YmToby8XE6nUx6PR+Hh4U2+/U4zXj9uzZf3DG/y/QIA0Jz58/nNbycBAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbOqEQk5OTI4fDoczMTKvNGKPZs2fL7XYrNDRU/fr107Zt23ye5/V6NXnyZLVp00ZhYWFKTU3V7t27fWpKS0uVkZEhp9Mpp9OpjIwMlZWVnUh3AQBAM9LoELNx40YtXLhQPXv29GmfN2+e5s+fr9zcXG3cuFEul0sDBw5URUWFVZOZmanly5dr6dKlWr16tSorK5WSkqKamhqrJj09XUVFRSooKFBBQYGKioqUkZHR2O4CAIBmplEhprKyUtddd52eeOIJtW7d2mo3xujBBx/UbbfdppEjR6p79+5asmSJfvjhBz333HOSJI/Ho0WLFun+++/XgAED1KtXLz377LP6+OOP9dZbb0mSduzYoYKCAj355JNKTExUYmKinnjiCb322mv69NNPm2DYAADA7hoVYm6++WYNHz5cAwYM8GnfuXOnSkpKNGjQIKstJCREycnJWrNmjSRp8+bNOnjwoE+N2+1W9+7drZq1a9fK6XQqISHBqunbt6+cTqdVcySv16vy8nKfBQAANF+B/j5h6dKl+vDDD7Vx48Y660pKSiRJ0dHRPu3R0dH66quvrJrg4GCfGZzamtrnl5SUKCoqqs72o6KirJoj5eTkaM6cOf4OBwAA2JRfMzG7du3SH//4Rz377LNq0aLFUescDofPY2NMnbYjHVlTX/2xtjNz5kx5PB5r2bVr1zH3BwAA7M2vELN582bt27dP8fHxCgwMVGBgoAoLC/XQQw8pMDDQmoE5crZk37591jqXy6Xq6mqVlpYes2bv3r119r9///46szy1QkJCFB4e7rMAAIDmy68Q079/f3388ccqKiqylt69e+u6665TUVGRzj//fLlcLq1atcp6TnV1tQoLC5WUlCRJio+PV1BQkE9NcXGxtm7datUkJibK4/Fow4YNVs369evl8XisGgAAcHbz65yYVq1aqXv37j5tYWFhioyMtNozMzOVnZ2tuLg4xcXFKTs7Wy1btlR6erokyel0auzYsZo6daoiIyMVERGhrKws9ejRwzpRuGvXrhoyZIjGjx+vBQsWSJImTJiglJQUdenS5YQHDQAA7M/vE3uPZ9q0aaqqqtKkSZNUWlqqhIQErVy5Uq1atbJqHnjgAQUGBiotLU1VVVXq37+/8vLyFBAQYNXk5+drypQp1lVMqampys3NberuAgAAm3IYY8zp7sTJUF5eLqfTKY/Hc1LOj+k04/Xj1nx5z/Am3y8AAM2ZP5/f/HYSAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACwJUIMAACw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bzeZmZkmLCzMfPnll8YYY2bMmGEyMjKs+i+++MK0bNnS/OlPfzLbt283ixYtMkFBQeZvf/vb6RqC3/wd83PPPWcCAwPNI488YoqLi62lrKzsdA2hUfwd95HsdiZ/LX/HXVFRYTp06GB+97vfmW3btpnCwkITFxdnxo0bd7qG0Cj+jnvx4sUmMDDQPProo+Y///mPWb16tendu7fp06fP6RqC3yoqKsyWLVvMli1bjCQzf/58s2XLFvPVV18ZY5rn8cwY/8fdXI5p/o77SHY7phFijuKRRx4xHTt2NMHBwebSSy81hYWF1rrRo0eb5ORkn/r33nvP9OrVywQHB5tOnTqZxx577BT3+MT5M+bk5GQjqc4yevToU9/xE+Tve/1zdvsH/3P+jnvHjh1mwIABJjQ01HTo0MHceuut5ocffjjFvT5x/o77oYceMt26dTOhoaGmXbt25rrrrjO7d+8+xb1uvHffffeY/1ab6/HM33E3l2NaY97vn7PbMc1hTDOdEwUAAM0a58QAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAABbIsQAAAC/vP/++xoxYoTcbrccDodefvllv54/e/ZsORyOOktYWJhf2yHEAAAAvxw4cEAXX3yxcnNzG/X8rKwsFRcX+yzdunXTNddc49d2CDEAAMAvQ4cO1V133aWRI0fWu766ulrTpk1T+/btFRYWpoSEBL333nvW+nPOOUcul8ta9u7dq+3bt2vs2LF+9SPwRAYBAABwpBtvvFFffvmlli5dKrfbreXLl2vIkCH6+OOPFRcXV6f+ySefVOfOnXXllVf6tR9mYgAAQJP5z3/+o+eff14vvviirrzySl1wwQXKysrSFVdcocWLF9ep93q9ys/P93sWRmImBgAANKEPP/xQxhh17tzZp93r9SoyMrJO/UsvvaSKigpdf/31fu+LEAMAAJrM4cOHFRAQoM2bNysgIMBn3TnnnFOn/sknn1RKSopcLpff+yLEAACAJtOrVy/V1NRo3759xz3HZefOnXr33Xf16quvNmpfhBgAAOCXyspK/fvf/7Ye79y5U0VFRYqIiFDnzp113XXX6frrr9f999+vXr166dtvv9U777yjHj16aNiwYdbznnrqKbVr105Dhw5tVD8cxhhzwqMBAABnjffee09XXXVVnfbRo0crLy9PBw8e1F133aWnn35a33zzjSIjI5WYmKg5c+aoR48ekn762qljx466/vrrdffddzeqH4QYAABgS1xiDQAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbIkQAwAAbOn/A7D6fCyLbnDMAAAAAElFTkSuQmCC",
+      "text/plain": [
+       "<Figure size 640x480 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "\n",
+    "plt.hist(listings['estimated_annual_revenue'], bins=50)\n",
+    "plt.title(\"Estimated Annual Revenue\")\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f413d0f4-1033-41d6-a2a4-406d43202b4b",
+   "metadata": {},
+   "source": [
+    "There are some huge outliers of estimated annual revenue."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "1b5350d5-92ed-45dd-a230-e98837faa5ac",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAigAAAGxCAYAAABIjE2TAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjAsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvlHJYcgAAAAlwSFlzAAAPYQAAD2EBqD+naQAAPEpJREFUeJzt3XlYlXX+//EXsktwEtRzPElKDmmGOYWNijVoKmYuNVZaluNWl41LkZppToVNA2alVpaNZWKa2jQuLTolTkY5tphpuTTVJG5fIVrwgIaA8Pn90Y97OrLoUZAbfD6u677qfO73fZ/PfXNf57z83MvxM8YYAQAA2Eijuu4AAADAiQgoAADAdggoAADAdggoAADAdggoAADAdggoAADAdggoAADAdggoAADAdggoAADAdggosJ309HT5+fnp008/reuuKCUlRX5+flVOe/fuPeV17d69WykpKZUuM2LECLVu3brG+u2LzZs3KyUlRYcPH67xdZ/Odl1xxRXy8/PTE088UeP9OZtOddtHjBjhdUwFBQWpTZs2mjx5svLz82u/o4BNBdR1B4D64O2335bD4ajQ3qJFi1Nex+7duzVjxgx17969whfXgw8+qHvuuedMu3laNm/erBkzZmjEiBE6//zz66QP5bZv365t27ZJkhYuXKjJkyfXaX/OltDQUL377ruSpMOHD+sf//iHnnzySX3xxRdav359HfcOqBsEFOAUxMfHq2nTprW2/jZt2tTauuuTF198UZLUr18/rV27Vps3b1ZCQkId96r2NWrUSF26dLFeX3vttdqzZ48yMjKUlZWlmJiYOuwdUDc4xYN6a9OmTerZs6fCw8PVuHFjJSQkaO3atZXWde3aVSEhIbrgggv04IMP6sUXX/T5FM3JzJ8/Xx07dtR5552n8PBwtWvXTg888ICkX05b3XzzzZKkHj16WMP56enpkio/HeDn56fx48dr0aJFatu2rUJDQ9WpUyd99NFHMsbo8ccfV0xMjM477zxdc801+u9//+u1fEZGhq6//nq1bNlSISEh+s1vfqMxY8bohx9+sGpSUlJ03333SZJiYmKsfr333ntWzauvvqquXbsqLCxM5513nvr06WONcvxaenq62rZtq+DgYF1yySV6+eWXfdp/x44d07JlyxQfH685c+ZIkl566aUKdeWn3Xbt2qVbb71VDodDTqdTo0aNksfjqXQfLlmyRJdccokaN26sjh076q233vKqq+p0TPl7/dqzzz6r3//+92revLnCwsLUoUMHzZo1SyUlJT5t78l06tRJkvTdd995tZ/s7zF37lz5+flVOB4k6f7771dQUJDXMbBhwwb17NlTERERaty4sbp166Z//etfXsud6j7fu3ev13H9a35+fkpJSfFq++abbzR06FA1b97cOm6effbZU95HaNgIKKiXMjMzdc0118jj8WjhwoVavny5wsPDNWDAAL366qtW3RdffKHevXvr559/1uLFi/X888/rs88+01//+lef3q+0tFTHjx/3mkpLS635K1as0NixY5WYmKjVq1drzZo1uvfee3X06FFJv4wIpKamSvrlC+7DDz/Uhx9+qH79+lX7vm+99ZZefPFFzZw5U8uXL1dBQYH69eunSZMm6d///rfmzZunBQsWaPfu3brxxhv16x8n//bbb9W1a1fNnz9f69ev10MPPaSPP/5YV111lfVlescdd2jChAmSpFWrVln9uuKKKyRJqampuvXWW9W+fXv9/e9/15IlS1RQUKCrr75au3fvtt4rPT1dI0eO1CWXXKKVK1fqz3/+s/7yl79Ypy1OxapVq5SXl6dRo0YpNjZWV111lV599VUdOXKk0vobb7xRF198sVauXKmpU6dq2bJluvfeeyvUrV27VvPmzdMjjzyilStXKjIyUn/4wx+0Z8+eU+7br3377bcaOnSolixZorfeekujR4/W448/rjFjxpzW+qqSlZWlgIAAXXTRRVbbqfw9br/9dgUFBVUICaWlpVq6dKkGDBhgjQYuXbpUSUlJioiI0OLFi/X3v/9dkZGR6tOnT4WQIp36Pj8Vu3fv1pVXXqmdO3fqySef1FtvvaV+/frp7rvv1owZM05rnWhgDGAzixYtMpLMli1bqqzp0qWLad68uSkoKLDajh8/buLi4kzLli1NWVmZMcaYm2++2YSFhZnvv//eqistLTXt27c3kkxWVla1fXn44YeNpEqnNm3aWHXjx483559/frXreu2114wks3Hjxgrzhg8fblq1auXVJsm4XC5z5MgRq23NmjVGkvntb39rbaMxxsydO9dIMl988UWl711WVmZKSkrMvn37jCTz+uuvW/Mef/zxSvfF/v37TUBAgJkwYYJXe0FBgXG5XGbw4MHGmF/2p9vtNldccYVXn/bu3WsCAwMrbFdVrrnmGhMSEmLy8vKMMf87DhYuXOhVV/43mTVrllf72LFjTUhIiFcfJBmn02ny8/OttpycHNOoUSOTlpZmtVW2/3/9XlUpLS01JSUl5uWXXzb+/v7mp59+Ouk6TzR8+HATFhZmSkpKTElJifnhhx/M/PnzTaNGjcwDDzxg1Z3q38MYYwYNGmRatmxpSktLrbZ169YZSebNN980xhhz9OhRExkZaQYMGFBhmzp27Gh+97vfVdgPJ9vnWVlZRpJZtGhRhe2UZB5++GHrdZ8+fUzLli2Nx+Pxqhs/frwJCQnx2pc4NzGCgnrn6NGj+vjjj3XTTTfpvPPOs9r9/f01bNgwHTx4UF999ZWk/420/Pr6kUaNGmnw4ME+veeGDRu0ZcsWr2nNmjXW/N/97nc6fPiwbr31Vr3++uteQ+hnokePHgoLC7NeX3LJJZKkvn37ep16KG/ft2+f1Zabm6u77rpL0dHRCggIUGBgoFq1aiVJ+vLLL0/63u+8846OHz+uP/7xj14jRyEhIUpMTLROA3311Vc6dOiQhg4d6tWnVq1anfL1I1lZWdq4caMGDRpkXah78803Kzw8vNLTPJI0cOBAr9eXXXaZjh07ptzcXK/2Hj16KDw83HrtdDrVvHlzr33li23btmngwIGKioqSv7+/AgMD9cc//lGlpaX6+uuvT2udR48eVWBgoAIDA9W0aVP96U9/0pAhQ7xG+k717yFJI0eO1MGDB7VhwwarbdGiRXK5XOrbt6+kXy6O/umnnzR8+HCv9ZWVlenaa6/Vli1brBHAcqe6z0/m2LFj+te//qU//OEPaty4sdf7X3fddTp27Jg++ugjn9aJhoeLZFHv5OXlyRhT6R00brdbkvTjjz9a/3U6nRXqKmurTseOHau9SHbYsGE6fvy4XnjhBd14440qKyvTlVdeqUcffVS9e/f26b1+LTIy0ut1UFBQte3Hjh2TJJWVlSkpKUmHDh3Sgw8+qA4dOigsLExlZWXq0qWLCgsLT/re5dc+XHnllZXOb9Tol3/flO9rl8tVocblcp3SdT4vvfSSjDG66aabvG53HjhwoF555RX95z//Ubt27byWiYqK8nodHBwsSRW27cS68tpT2Qcn2r9/v66++mq1bdtWTz31lFq3bq2QkBB98sknGjdu3GmtU/rlLp73339fkpSTk6Mnn3xSy5cv12WXXaapU6dKOvW/h/RLgG3RooUWLVqkpKQk5eXl6Y033tA999wjf39/r/XddNNNVfbrp59+8grIp7rPT+bHH3/U8ePH9cwzz+iZZ56ptKamQj7qLwIK6p0mTZqoUaNGys7OrjDv0KFDkmSFiaioqAoXGUq/fAnUtJEjR2rkyJE6evSo3n//fT388MPq37+/vv76a2vk4mzZuXOnPv/8c6Wnp2v48OFWe2UXTlalfB/+4x//qLb/5V9ale3TU9nPZWVl1vUSgwYNqrTmpZde0qxZs066rtMVEhKioqKiCu0nfkmuWbNGR48e1apVq7z2yfbt28/o/Rs1amRdFCtJvXv3Vnx8vGbMmKHbbrtN0dHRp/z3kP43mvj000/r8OHDWrZsmYqKijRy5Eirpnx9zzzzjNcdRL/ma5APCQmRpAr7sjzElmvSpInVx3HjxlW6Lu5cAgEF9U5YWJg6d+6sVatW6YknnlBoaKikX77oli5dqpYtW+riiy+WJCUmJmrdunX64YcfrA/ksrIyvfbaa7Xav759+6q4uFg33HCDdu3apVatWp32vzZPR/mplvL3LPe3v/2tQm1V/erTp48CAgL07bff6sYbb6zyvdq2basWLVpo+fLlmjhxovXe+/bt0+bNm61Rraq88847OnjwoMaNG1fpv+bHjx+vl19+WampqQoIqJ2PrNatWys3N1ffffed9aVcXFysd955x6uusv1qjNELL7xQo/0JDg7Ws88+q+7du+vRRx/V3/72t1P+e5QbOXKkZs2apeXLlys9PV1du3b1GoXq1q2bzj//fO3evVvjx4+vkX47nU6FhIToiy++8Gp//fXXvV43btxYPXr00LZt23TZZZdZI4DArxFQYFvvvvtupacHrrvuOqWlpal3797q0aOHJk+erKCgID333HPauXOnli9fbn2RTJ8+XW+++aZ69uyp6dOnKzQ0VM8//7x1bv3Xw+LV2bp1a6UPamvfvr0iIiJ05513KjQ0VN26dVOLFi2Uk5OjtLQ0ORwOa0g+Li5OkrRgwQKFh4crJCREMTExlZ6COFPt2rVTmzZtNHXqVBljFBkZqTfffFMZGRkVajt06CBJeuqppzR8+HAFBgaqbdu2at26tR555BFNnz5de/bs0bXXXqsmTZrou+++0yeffKKwsDDNmDFDjRo10l/+8hfdcccd+sMf/qA777xThw8fVkpKSqWnfU60cOFCBQQE6IEHHqg0zIwZM0Z333231q5dq+uvv/7Md04lhgwZooceeki33HKL7rvvPh07dkxPP/20151a0i8jG0FBQbr11ls1ZcoUHTt2TPPnz1deXl6N9ykxMVHXXXedFi1apKlTpyomJuaU/h7l2rVrp65duyotLU0HDhzQggULvNZ/3nnn6ZlnntHw4cP1008/6aabblLz5s31/fff6/PPP9f333+v+fPn+9RnPz8/3X777XrppZfUpk0bdezYUZ988omWLVtWofapp57SVVddpauvvlp/+tOf1Lp1axUUFOi///2v3nzzTZ/uAEMDVbfX6AIVld+9UdVUfrfJBx98YK655hoTFhZmQkNDTZcuXaw7FH7tgw8+MJ07dzbBwcHG5XKZ++67zzz22GNGkjl8+HC1fanuLh5JJiMjwxhjzOLFi02PHj2M0+k0QUFBxu12m8GDB1e4q2bu3LkmJibG+Pv7e93tUNVdPOPGjfNqK79L4vHHH/dq37hxo5FkXnvtNatt9+7dpnfv3iY8PNw0adLE3HzzzWb//v0V7qYwxphp06YZt9ttGjVqVOFOozVr1pgePXqYiIgIExwcbFq1amVuuukms2HDBq91vPjiiyY2NtYEBQWZiy++2Lz00ksnvZPl+++/N0FBQeaGG26osiYvL8+EhoZad5uU/01+fWeWMf87bn59N1Jl+9AYY1q1amWGDx/u1bZu3Trz29/+1oSGhpqLLrrIzJs3r9K7eN58803TsWNHExISYi644AJz3333mX/+858V9puvd/FUZseOHaZRo0Zm5MiRVtup/j2MMWbBggVGkgkNDa1wt0y5zMxM069fPxMZGWkCAwPNBRdcYPr16+d1LPmyzz0ej7njjjuM0+k0YWFhZsCAAWbv3r2VHndZWVlm1KhR5oILLjCBgYGmWbNmJiEhwTz66KMn2204B/gZ86sHJwDniKSkJO3du/e077oAANQuTvGgwZs4caIuv/xyRUdH66efftIrr7yijIwMLVy4sK67BgCoAgEFDV5paakeeugh5eTkyM/PT+3bt9eSJUt0++2313XXAABV4BQPAACwHZ4kCwAAbIeAAgAAbIeAAgAAbKdeXiRbVlamQ4cOKTw83OvHyQAAgH0ZY1RQUCC3233SB2XWy4By6NAh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v/+9jDGaO3eupk+frkGDBkmSFi9eLKfTqWXLlmnMmDHyeDxauHChlixZol69ekmSli5dqujoaG3YsEF9+vSpoU0DAAD11Rldg+LxeCRJkZGRkqSsrCzl5OQoKSnJqgkODlZiYqI2b94sSdq6datKSkq8atxut+Li4qyaExUVFSk/P99rAgAADddpBxRjjCZOnKirrrpKcXFxkqScnBxJktPp9Kp1Op3WvJycHAUFBalJkyZV1pwoLS1NDofDmqKjo0+32wAAoB447YAyfvx4ffHFF1q+fHmFeX5+fl6vjTEV2k5UXc20adPk8Xis6cCBA6fbbQAAUA+cVkCZMGGC3njjDW3cuNHrzhuXyyVJFUZCcnNzrVEVl8ul4uJi5eXlVVlzouDgYEVERHhNAACg4fIpoBhjNH78eK1atUrvvvuuYmJivObHxMTI5XIpIyPDaisuLlZmZqYSEhIkSfHx8QoMDPSqyc7O1s6dO60aAABwbvPpLp5x48Zp2bJlev311xUeHm6NlDgcDoWGhsrPz0/JyclKTU1VbGysYmNjlZqaqsaNG2vo0KFW7ejRozVp0iRFRUUpMjJSkydPVocOHay7egAAwLnNp4Ayf/58SVL37t292hctWqQRI0ZIkqZMmaLCwkKNHTvWelDb+vXrFR4ebtXPmTNHAQEBGjx4sPWgtvT0dPn7+5/Z1gAAgAbBzxhj6roTvsrPz5fD4ZDH46mV61FO5cmbe2f2q/H3BWoDT5JFdfgsw9nky/c3v8UDAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsx6fnoACwF24hBtBQMYICAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsh4ACAABsx+eA8v7772vAgAFyu93y8/PTmjVrvOYbY5SSkiK3263Q0FB1795du3bt8qopKirShAkT1LRpU4WFhWngwIE6ePDgGW0IAABoOHwOKEePHlXHjh01b968SufPmjVLs2fP1rx587Rlyxa5XC717t1b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",
+      "text/plain": [
+       "<Figure size 640x480 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "plt.hist(np.log1p(listings['estimated_annual_revenue']), bins=50)\n",
+    "plt.title(\"Log Estimated Annual Revenue\")\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3b9d6035-27fc-4be3-b0fd-61d487ebc33b",
+   "metadata": {},
+   "source": [
+    "✔ Should use log_revenue as target\n",
+    "✔ Linear assumptions are more reasonable\n",
+    "✔ XGBoost will behave better\n",
+    "✔ SHAP values will be more stable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "07bcf9a1-f19c-442c-b347-3fe6aab11d82",
+   "metadata": {},
+   "source": [
+    "### Create Log Revenue"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "7ebdbcc7-1eee-48fb-b14b-0a3ddda0cd0a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "listings['log_revenue'] = np.log1p(listings['estimated_annual_revenue'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0d6aacfe-178e-4cb2-835b-9248eb0e8fe9",
+   "metadata": {},
+   "source": [
+    "### Check"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "1f1e7572-390f-4161-a334-2862ece45583",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>price</th>\n",
+       "      <th>availability_365</th>\n",
+       "      <th>estimated_annual_revenue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>7825.000000</td>\n",
+       "      <td>8660.000000</td>\n",
+       "      <td>7.825000e+03</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>601.304792</td>\n",
+       "      <td>229.820554</td>\n",
+       "      <td>4.688587e+04</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>4200.617938</td>\n",
+       "      <td>117.302921</td>\n",
+       "      <td>3.522773e+05</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>13.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000e+00</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>97.000000</td>\n",
+       "      <td>141.000000</td>\n",
+       "      <td>3.328000e+03</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>153.000000</td>\n",
+       "      <td>260.000000</td>\n",
+       "      <td>1.287500e+04</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>240.000000</td>\n",
+       "      <td>338.000000</td>\n",
+       "      <td>3.112200e+04</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>50032.000000</td>\n",
+       "      <td>365.000000</td>\n",
+       "      <td>1.460000e+07</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              price  availability_365  estimated_annual_revenue\n",
+       "count   7825.000000       8660.000000              7.825000e+03\n",
+       "mean     601.304792        229.820554              4.688587e+04\n",
+       "std     4200.617938        117.302921              3.522773e+05\n",
+       "min       13.000000          0.000000              0.000000e+00\n",
+       "25%       97.000000        141.000000              3.328000e+03\n",
+       "50%      153.000000        260.000000              1.287500e+04\n",
+       "75%      240.000000        338.000000              3.112200e+04\n",
+       "max    50032.000000        365.000000              1.460000e+07"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings[['price','availability_365','estimated_annual_revenue']].describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "74680662-c951-4663-b6ea-d1c469efeef8",
+   "metadata": {},
+   "source": [
+    "- Some listings have missing price\n",
+    "- Those rows were dropped automatically when revenue was calculated"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3508d9db-1526-4582-a14d-df51fa6972d8",
+   "metadata": {},
+   "source": [
+    "Max price = $50,032 per night is not possible:\n",
+    "- Data error\n",
+    "- Luxury pricing anomaly\n",
+    "- Possibly typo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "0fd00017-03ef-4e91-a4d0-f83616622548",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "upper_cap = listings['estimated_annual_revenue'].quantile(0.99)\n",
+    "\n",
+    "listings = listings[\n",
+    "    listings['estimated_annual_revenue'] <= upper_cap\n",
+    "]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "bdbf2fcd-7325-491d-a2f6-4e615807ff2c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count      7746.000000\n",
+       "mean      23230.103021\n",
+       "std       34170.169320\n",
+       "min           0.000000\n",
+       "25%        3281.250000\n",
+       "50%       12584.000000\n",
+       "75%       30456.000000\n",
+       "max      426503.000000\n",
+       "Name: estimated_annual_revenue, dtype: float64"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "listings['estimated_annual_revenue'].describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5adb99f0-ce96-438b-bd76-816a3fb6115e",
+   "metadata": {},
+   "source": [
+    "We winsorized the revenue distribution at the 99th percentile to reduce distortion from extreme pricing outliers."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1fe84d05-cbaa-4b02-ae4b-16dcb7421cf0",
+   "metadata": {},
+   "source": [
+    "### Remove zero-revenue listings"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "0d5b5920-d69c-4d3a-a3b9-044e61aafe10",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "np.float64(0.03756777691711851)"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "(listings['estimated_annual_revenue'] == 0).mean()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "453961dc-91d0-46fe-9928-9866d9d40515",
+   "metadata": {},
+   "source": [
+    "Since it’s only 3.8%, remove them for modeling: \n",
+    "- They are not truly “earning” listings\n",
+    "- They may distort clustering\n",
+    "- Log transformation compresses them to 0\n",
+    "- They don’t help predict performance drivers"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "id": "26d56d08-d606-4d54-9c08-50ce870611f7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Remove zero revenue\n",
+    "listings = listings[listings['estimated_annual_revenue'] > 0]\n",
+    "\n",
+    "# Cap extreme outliers at 99th percentile\n",
+    "upper_cap = listings['estimated_annual_revenue'].quantile(0.99)\n",
+    "listings = listings[listings['estimated_annual_revenue'] <= upper_cap]\n",
+    "\n",
+    "# Create log target\n",
+    "import numpy as np\n",
+    "listings['log_revenue'] = np.log1p(listings['estimated_annual_revenue'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cee39015-008e-4665-87ac-d64dfe331d28",
+   "metadata": {},
+   "source": [
+    "## Final Recommendation for Target Variable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "514ac6ab-e24c-45c0-92e3-d08fc34930db",
+   "metadata": {},
+   "source": [
+    "For modeling:\n",
+    "\n",
+    "- Use log_revenue\n",
+    "- Remove zero-revenue listings\n",
+    "- Cap at 99th percentile"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d6b678f4-5d82-4685-8cd1-54572a546c53",
+   "metadata": {},
+   "source": [
+    "## Load Review.csv Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "b0a7621c-4c3a-479c-8d21-9891783a5ccd",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>listing_id</th>\n",
+       "      <th>id</th>\n",
+       "      <th>date</th>\n",
+       "      <th>reviewer_id</th>\n",
+       "      <th>reviewer_name</th>\n",
+       "      <th>comments</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>25218143</td>\n",
+       "      <td>2015-01-09</td>\n",
+       "      <td>14385014</td>\n",
+       "      <td>Ivan</td>\n",
+       "      <td>it's a wonderful trip experience. I didn't exc...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>28475392</td>\n",
+       "      <td>2015-03-24</td>\n",
+       "      <td>16241178</td>\n",
+       "      <td>Namhaitou</td>\n",
+       "      <td>This is my first trip using Airbnb. I was a li...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>30974202</td>\n",
+       "      <td>2015-04-30</td>\n",
+       "      <td>26247321</td>\n",
+       "      <td>Cristina</td>\n",
+       "      <td>Sólo puedo decir cosas buenas de Rebecca. La h...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>31363208</td>\n",
+       "      <td>2015-05-04</td>\n",
+       "      <td>31293837</td>\n",
+       "      <td>SuJung</td>\n",
+       "      <td>Rebecca was an absolutely wonderful host.\\r&lt;br...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>31820011</td>\n",
+       "      <td>2015-05-10</td>\n",
+       "      <td>2873370</td>\n",
+       "      <td>Krishanu</td>\n",
+       "      <td>Rebecca really tried to make it feel like home...</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   listing_id        id        date  reviewer_id reviewer_name  \\\n",
+       "0        2384  25218143  2015-01-09     14385014          Ivan   \n",
+       "1        2384  28475392  2015-03-24     16241178     Namhaitou   \n",
+       "2        2384  30974202  2015-04-30     26247321      Cristina   \n",
+       "3        2384  31363208  2015-05-04     31293837        SuJung   \n",
+       "4        2384  31820011  2015-05-10      2873370      Krishanu   \n",
+       "\n",
+       "                                            comments  \n",
+       "0  it's a wonderful trip experience. I didn't exc...  \n",
+       "1  This is my first trip using Airbnb. I was a li...  \n",
+       "2  Sólo puedo decir cosas buenas de Rebecca. La h...  \n",
+       "3  Rebecca was an absolutely wonderful host.\\r<br...  \n",
+       "4  Rebecca really tried to make it feel like home...  "
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "reviews = pd.read_csv(\n",
+    "    \"/Users/shennalu/Downloads/reviews (1).csv.gz\",\n",
+    "    compression=\"gzip\",\n",
+    "    low_memory=False\n",
+    ")\n",
+    "\n",
+    "reviews.head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "b1457d59-f73f-477f-ad99-1a7653d69c5e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index(['listing_id', 'id', 'date', 'reviewer_id', 'reviewer_name', 'comments'], dtype='object')"
+      ]
+     },
+     "execution_count": 30,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "reviews.columns"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fb5550f3-cc79-4153-8478-611fcca11e07",
+   "metadata": {},
+   "source": [
+    "### Convert to date format"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "id": "d2433953-e7dd-411d-b48f-0c3d76135f0f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "reviews['date'] = pd.to_datetime(reviews['date'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2a92a024-dc18-42d7-9645-2c2a1d3fb42a",
+   "metadata": {},
+   "source": [
+    "### Remove missing comments"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "b8104fa5-6d2a-4579-a590-0cd1bb586fab",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "reviews = reviews[reviews['comments'].notna()]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "78823ae4-078c-4616-ac30-5f2995a94c89",
+   "metadata": {},
+   "source": [
+    "### 1) Total Review Count"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "f654c5ff-db09-48f5-a24a-aa48afff5755",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "review_count = (\n",
+    "    reviews\n",
+    "    .groupby('listing_id')\n",
+    "    .size()\n",
+    "    .reset_index(name='total_review_count')\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2ea42c9c-3340-4fbc-beed-ffc668359abe",
+   "metadata": {},
+   "source": [
+    "### 2) Average Review Length"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "61589256-9634-4cf3-b769-c99b9d847f53",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "reviews['review_length'] = reviews['comments'].str.len()\n",
+    "\n",
+    "avg_review_length = (\n",
+    "    reviews\n",
+    "    .groupby('listing_id')['review_length']\n",
+    "    .mean()\n",
+    "    .reset_index()\n",
+    "    .rename(columns={'review_length': 'avg_review_length'})\n",
+    ")\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3400b8d9-6702-427c-bb96-df91df45bec4",
+   "metadata": {},
+   "source": [
+    "### 3) Reviews in Last 12 Months"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "69e996ef-0340-444e-91ad-7d126e64a946",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "latest_date = reviews['date'].max()\n",
+    "one_year_ago = latest_date - pd.DateOffset(years=1)\n",
+    "\n",
+    "recent_reviews = reviews[reviews['date'] >= one_year_ago]\n",
+    "\n",
+    "recent_review_count = (\n",
+    "    recent_reviews\n",
+    "    .groupby('listing_id')\n",
+    "    .size()\n",
+    "    .reset_index(name='recent_review_count')\n",
+    ")\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "29859db7-a749-4c16-97b2-ee24a0dd0971",
+   "metadata": {},
+   "source": [
+    "### Merge Review Features Together"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "id": "aa70e354-81d8-441b-b84b-d578130ecc97",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>listing_id</th>\n",
+       "      <th>total_review_count</th>\n",
+       "      <th>avg_review_length</th>\n",
+       "      <th>recent_review_count</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>257</td>\n",
+       "      <td>378.642023</td>\n",
+       "      <td>10.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>7126</td>\n",
+       "      <td>595</td>\n",
+       "      <td>267.315966</td>\n",
+       "      <td>47.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>10945</td>\n",
+       "      <td>129</td>\n",
+       "      <td>238.837209</td>\n",
+       "      <td>24.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>12140</td>\n",
+       "      <td>19</td>\n",
+       "      <td>251.631579</td>\n",
+       "      <td>3.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28749</td>\n",
+       "      <td>265</td>\n",
+       "      <td>308.388679</td>\n",
+       "      <td>37.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   listing_id  total_review_count  avg_review_length  recent_review_count\n",
+       "0        2384                 257         378.642023                 10.0\n",
+       "1        7126                 595         267.315966                 47.0\n",
+       "2       10945                 129         238.837209                 24.0\n",
+       "3       12140                  19         251.631579                  3.0\n",
+       "4       28749                 265         308.388679                 37.0"
+      ]
+     },
+     "execution_count": 36,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "reviews_agg = review_count.merge(\n",
+    "    avg_review_length,\n",
+    "    on='listing_id',\n",
+    "    how='left'\n",
+    ")\n",
+    "\n",
+    "reviews_agg = reviews_agg.merge(\n",
+    "    recent_review_count,\n",
+    "    on='listing_id',\n",
+    "    how='left'\n",
+    ")\n",
+    "\n",
+    "reviews_agg.fillna(0, inplace=True)\n",
+    "\n",
+    "reviews_agg.head()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "19dce982-bb1b-4f1b-8b81-aae47490db1e",
+   "metadata": {},
+   "source": [
+    "## Build: Chicago_Airbnb_Master_v1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7ebc8339-9a85-467f-8f72-4f2a0ff8ec53",
+   "metadata": {},
+   "source": [
+    "### Standardize Key Column"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "eabdd31b-aa41-40e8-8b46-0e9d9e56e47e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# listings originally had \"id\"\n",
+    "if \"id\" in listings.columns:\n",
+    "    listings = listings.rename(columns={\"id\": \"listing_id\"})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "c3738829-b25f-4295-98d8-84d4363be45f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "7380\n",
+      "8663\n",
+      "6978\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(listings[\"listing_id\"].nunique())\n",
+    "print(calendar_agg[\"listing_id\"].nunique())\n",
+    "print(reviews_agg[\"listing_id\"].nunique())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "791b4896-d453-458e-9219-a648733c7d47",
+   "metadata": {},
+   "source": [
+    "### Merge All Three (listings as base, left joins)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "id": "4a30ea21-77a0-40ac-818f-993c0e58f651",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "After merge:\n",
+      "rows: 7380\n",
+      "unique listing_id: 7380\n",
+      "dup listing_id: 0\n"
+     ]
+    }
+   ],
+   "source": [
+    "master = listings.merge(calendar_agg, on=\"listing_id\", how=\"left\", validate=\"one_to_one\")\n",
+    "master = master.merge(reviews_agg, on=\"listing_id\", how=\"left\", validate=\"one_to_one\")\n",
+    "\n",
+    "print(\"After merge:\")\n",
+    "print(\"rows:\", master.shape[0])\n",
+    "print(\"unique listing_id:\", master[\"listing_id\"].nunique())\n",
+    "print(\"dup listing_id:\", master[\"listing_id\"].duplicated().sum())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a39b1f94-9b2d-4c00-9544-7874cce5f595",
+   "metadata": {},
+   "source": [
+    "### Fill Missing Values from calendar/reviews merges"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "a5bcb63d-747d-4c2e-8815-3f719a23d9d5",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "calendar_cols = [\"booking_rate\", \"weekend_booking_rate\", \"summer_booking_rate\", \"winter_booking_rate\"]\n",
+    "review_cols   = [\"total_review_count\", \"recent_review_count\", \"avg_review_length\"]\n",
+    "\n",
+    "for c in calendar_cols:\n",
+    "    if c in master.columns:\n",
+    "        master[c] = master[c].fillna(0)\n",
+    "\n",
+    "for c in review_cols:\n",
+    "    if c in master.columns:\n",
+    "        master[c] = master[c].fillna(0)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "43b44fde-ea34-4043-b6b7-e58d475f6580",
+   "metadata": {},
+   "source": [
+    "### Recompute Revenue using booking_rate (calendar-based)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "aa1b32e3-3353-4743-8421-95340718b548",
+   "metadata": {},
+   "source": [
+    "#### Compute target"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "id": "d39fe096-634a-4426-94ab-9d6500199c71",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "master[\"estimated_annual_revenue\"] = master[\"price\"] * master[\"booking_rate\"] * 365\n",
+    "master[\"log_revenue\"] = np.log1p(master[\"estimated_annual_revenue\"])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fb5f1c49-764c-445c-b90a-376ef04a5c10",
+   "metadata": {},
+   "source": [
+    "#### Clean target: drop zero + cap extreme outliers (99th pct)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "id": "f1c3e7c3-45ef-4556-aba0-db35159e1451",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "             price  booking_rate  estimated_annual_revenue  log_revenue\n",
+      "count  7306.000000   7306.000000                7306.00000  7306.000000\n",
+      "mean    192.348754      0.343329               20589.98426     9.177827\n",
+      "std     209.686116      0.290471               21993.88540     1.478770\n",
+      "min      13.000000      0.002740                  28.00000     3.367296\n",
+      "25%      95.000000      0.079452                3838.50000     8.253097\n",
+      "50%     149.000000      0.279452               13116.00000     9.481664\n",
+      "75%     229.000000      0.567123               29915.00000    10.306149\n",
+      "max    6977.000000      1.000000              116350.00000    11.664367\n"
+     ]
+    }
+   ],
+   "source": [
+    "# drop zero / invalid revenue\n",
+    "master = master[master[\"estimated_annual_revenue\"] > 0]\n",
+    "\n",
+    "# cap outliers\n",
+    "cap = master[\"estimated_annual_revenue\"].quantile(0.99)\n",
+    "master = master[master[\"estimated_annual_revenue\"] <= cap]\n",
+    "\n",
+    "# recompute log after filtering\n",
+    "master[\"log_revenue\"] = np.log1p(master[\"estimated_annual_revenue\"])\n",
+    "\n",
+    "print(master[[\"price\",\"booking_rate\",\"estimated_annual_revenue\",\"log_revenue\"]].describe())\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "ceb1d29f-8b7a-453a-813c-12c1a77ab656",
+   "metadata": {},
+   "source": [
+    "### Select Columns for Chicago_Airbnb_Master_v1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "7c9bb1a3-a0ff-491f-9049-51528fb5e4cc",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Master v1 shape: (7306, 17)\n",
+      "dup listing_id: 0\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>listing_id</th>\n",
+       "      <th>price</th>\n",
+       "      <th>accommodates</th>\n",
+       "      <th>bedrooms</th>\n",
+       "      <th>bathrooms</th>\n",
+       "      <th>room_type</th>\n",
+       "      <th>property_type</th>\n",
+       "      <th>review_scores_rating</th>\n",
+       "      <th>booking_rate</th>\n",
+       "      <th>weekend_booking_rate</th>\n",
+       "      <th>summer_booking_rate</th>\n",
+       "      <th>winter_booking_rate</th>\n",
+       "      <th>total_review_count</th>\n",
+       "      <th>recent_review_count</th>\n",
+       "      <th>avg_review_length</th>\n",
+       "      <th>estimated_annual_revenue</th>\n",
+       "      <th>log_revenue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>2384</td>\n",
+       "      <td>119.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>Private room</td>\n",
+       "      <td>Private room in condo</td>\n",
+       "      <td>4.99</td>\n",
+       "      <td>0.046575</td>\n",
+       "      <td>0.048077</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>257.0</td>\n",
+       "      <td>10.0</td>\n",
+       "      <td>378.642023</td>\n",
+       "      <td>2023.0</td>\n",
+       "      <td>7.612831</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>7126</td>\n",
+       "      <td>89.0</td>\n",
+       "      <td>2</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>Entire home/apt</td>\n",
+       "      <td>Entire rental unit</td>\n",
+       "      <td>4.73</td>\n",
+       "      <td>0.172603</td>\n",
+       "      <td>0.182692</td>\n",
+       "      <td>0.086957</td>\n",
+       "      <td>0.077778</td>\n",
+       "      <td>595.0</td>\n",
+       "      <td>47.0</td>\n",
+       "      <td>267.315966</td>\n",
+       "      <td>5607.0</td>\n",
+       "      <td>8.631949</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>10945</td>\n",
+       "      <td>203.0</td>\n",
+       "      <td>4</td>\n",
+       "      <td>2.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>Entire home/apt</td>\n",
+       "      <td>Entire rental unit</td>\n",
+       "      <td>4.74</td>\n",
+       "      <td>0.109589</td>\n",
+       "      <td>0.115385</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>129.0</td>\n",
+       "      <td>24.0</td>\n",
+       "      <td>238.837209</td>\n",
+       "      <td>8120.0</td>\n",
+       "      <td>9.002209</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>12140</td>\n",
+       "      <td>339.0</td>\n",
+       "      <td>3</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>Private room</td>\n",
+       "      <td>Room in boutique hotel</td>\n",
+       "      <td>4.95</td>\n",
+       "      <td>0.572603</td>\n",
+       "      <td>0.605769</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>0.000000</td>\n",
+       "      <td>19.0</td>\n",
+       "      <td>3.0</td>\n",
+       "      <td>251.631579</td>\n",
+       "      <td>70851.0</td>\n",
+       "      <td>11.168348</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28749</td>\n",
+       "      <td>258.0</td>\n",
+       "      <td>6</td>\n",
+       "      <td>3.0</td>\n",
+       "      <td>2.0</td>\n",
+       "      <td>Entire home/apt</td>\n",
+       "      <td>Entire loft</td>\n",
+       "      <td>4.83</td>\n",
+       "      <td>0.797260</td>\n",
+       "      <td>0.807692</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>0.766667</td>\n",
+       "      <td>265.0</td>\n",
+       "      <td>37.0</td>\n",
+       "      <td>308.388679</td>\n",
+       "      <td>75078.0</td>\n",
+       "      <td>11.226296</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   listing_id  price  accommodates  bedrooms  bathrooms        room_type  \\\n",
+       "0        2384  119.0             1       1.0        1.0     Private room   \n",
+       "1        7126   89.0             2       1.0        1.0  Entire home/apt   \n",
+       "2       10945  203.0             4       2.0        1.0  Entire home/apt   \n",
+       "3       12140  339.0             3       1.0        1.0     Private room   \n",
+       "4       28749  258.0             6       3.0        2.0  Entire home/apt   \n",
+       "\n",
+       "            property_type  review_scores_rating  booking_rate  \\\n",
+       "0   Private room in condo                  4.99      0.046575   \n",
+       "1      Entire rental unit                  4.73      0.172603   \n",
+       "2      Entire rental unit                  4.74      0.109589   \n",
+       "3  Room in boutique hotel                  4.95      0.572603   \n",
+       "4             Entire loft                  4.83      0.797260   \n",
+       "\n",
+       "   weekend_booking_rate  summer_booking_rate  winter_booking_rate  \\\n",
+       "0              0.048077             0.000000             0.000000   \n",
+       "1              0.182692             0.086957             0.077778   \n",
+       "2              0.115385             0.000000             0.000000   \n",
+       "3              0.605769             1.000000             0.000000   \n",
+       "4              0.807692             1.000000             0.766667   \n",
+       "\n",
+       "   total_review_count  recent_review_count  avg_review_length  \\\n",
+       "0               257.0                 10.0         378.642023   \n",
+       "1               595.0                 47.0         267.315966   \n",
+       "2               129.0                 24.0         238.837209   \n",
+       "3                19.0                  3.0         251.631579   \n",
+       "4               265.0                 37.0         308.388679   \n",
+       "\n",
+       "   estimated_annual_revenue  log_revenue  \n",
+       "0                    2023.0     7.612831  \n",
+       "1                    5607.0     8.631949  \n",
+       "2                    8120.0     9.002209  \n",
+       "3                   70851.0    11.168348  \n",
+       "4                   75078.0    11.226296  "
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "keep_cols = [\n",
+    "    # key\n",
+    "    \"listing_id\",\n",
+    "\n",
+    "    # structured (from listings)\n",
+    "    \"price\", \"accommodates\", \"bedrooms\", \"bathrooms\",\n",
+    "    \"room_type\", \"property_type\", \"review_scores_rating\",\n",
+    "\n",
+    "    # calendar engineered\n",
+    "    \"booking_rate\", \"weekend_booking_rate\", \"summer_booking_rate\", \"winter_booking_rate\",\n",
+    "\n",
+    "    # review engineered\n",
+    "    \"total_review_count\", \"recent_review_count\", \"avg_review_length\",\n",
+    "\n",
+    "    # targets\n",
+    "    \"estimated_annual_revenue\", \"log_revenue\"\n",
+    "]\n",
+    "\n",
+    "# keep only columns that exist (prevents KeyError if a column name differs)\n",
+    "keep_cols = [c for c in keep_cols if c in master.columns]\n",
+    "\n",
+    "master_v1 = master[keep_cols].copy()\n",
+    "\n",
+    "print(\"Master v1 shape:\", master_v1.shape)\n",
+    "print(\"dup listing_id:\", master_v1[\"listing_id\"].duplicated().sum())\n",
+    "master_v1.head()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "id": "590af41d-40c7-4f19-befa-58f41172c143",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>estimated_annual_revenue</th>\n",
+       "      <th>log_revenue</th>\n",
+       "      <th>booking_rate</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>7306.00000</td>\n",
+       "      <td>7306.000000</td>\n",
+       "      <td>7306.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>20589.98426</td>\n",
+       "      <td>9.177827</td>\n",
+       "      <td>0.343329</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>21993.88540</td>\n",
+       "      <td>1.478770</td>\n",
+       "      <td>0.290471</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>28.00000</td>\n",
+       "      <td>3.367296</td>\n",
+       "      <td>0.002740</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>3838.50000</td>\n",
+       "      <td>8.253097</td>\n",
+       "      <td>0.079452</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>13116.00000</td>\n",
+       "      <td>9.481664</td>\n",
+       "      <td>0.279452</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>29915.00000</td>\n",
+       "      <td>10.306149</td>\n",
+       "      <td>0.567123</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>116350.00000</td>\n",
+       "      <td>11.664367</td>\n",
+       "      <td>1.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       estimated_annual_revenue  log_revenue  booking_rate\n",
+       "count                7306.00000  7306.000000   7306.000000\n",
+       "mean                20589.98426     9.177827      0.343329\n",
+       "std                 21993.88540     1.478770      0.290471\n",
+       "min                    28.00000     3.367296      0.002740\n",
+       "25%                  3838.50000     8.253097      0.079452\n",
+       "50%                 13116.00000     9.481664      0.279452\n",
+       "75%                 29915.00000    10.306149      0.567123\n",
+       "max                116350.00000    11.664367      1.000000"
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "master_v1[[\"estimated_annual_revenue\", \"log_revenue\", \"booking_rate\"]].describe()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "d6359402-36f5-410a-9312-70b144553255",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "review_scores_rating        0.173008\n",
+       "bedrooms                    0.000821\n",
+       "bathrooms                   0.000274\n",
+       "listing_id                  0.000000\n",
+       "summer_booking_rate         0.000000\n",
+       "estimated_annual_revenue    0.000000\n",
+       "avg_review_length           0.000000\n",
+       "recent_review_count         0.000000\n",
+       "total_review_count          0.000000\n",
+       "winter_booking_rate         0.000000\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 45,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "master_v1.isna().mean().sort_values(ascending=False).head(10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7b6d0fc1-6494-44df-a498-9106a1bc72c4",
+   "metadata": {},
+   "source": [
+    "## Save Master File v1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "id": "9b02df8c-97e1-47da-935b-1904fe8cdb82",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'/Users/shennalu/Downloads'"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import os\n",
+    "os.getcwd()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2d559944-635d-49ff-8b46-b78b990ffa9b",
+   "metadata": {},
+   "source": [
+    "## Rename Booking Rate (Suggested by Ellie)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "id": "7c6aebf4-9573-4576-b959-fc6f4509b766",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "master_v1 = master_v1.rename(columns={\n",
+    "    \"booking_rate\": \"occupancy_proxy\",\n",
+    "    \"weekend_booking_rate\": \"weekend_occupancy_proxy\",\n",
+    "    \"summer_booking_rate\": \"summer_occupancy_proxy\",\n",
+    "    \"winter_booking_rate\": \"winter_occupancy_proxy\"\n",
+    "})\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "id": "a590db39-bd95-428a-8f35-c107b4a1a2ed",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "master_v1.to_csv(\"Chicago_Airbnb_Master_v1.csv\", index=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a679353a-0c5f-4338-8f8e-c1d62ea1d934",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
