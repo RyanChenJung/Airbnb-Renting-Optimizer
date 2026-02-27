@@ -3,7 +3,6 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 venv/
-*.csv
 *.gz
 *.geojson
 !data_processed/Geospatial_Engineering_v3.csv
