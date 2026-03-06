@@ -10,3 +10,6 @@ venv/
 # Prevent raw data from being uploaded
 data_raw/
 *.csv
+notebooks/ellie/revenue_modeling_advanced copy.ipynb
+.venv/
+.vscode/
