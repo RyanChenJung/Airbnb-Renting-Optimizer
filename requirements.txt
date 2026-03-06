@@ -10,3 +10,6 @@ umap-learn
 gensim
 nltk
 optuna
+ipykernel==6.31.0
+jupyter_client==8.8.0
+pyzmq==26.4.0
